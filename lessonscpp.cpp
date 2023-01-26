@@ -1,22 +1,28 @@
 ﻿#include <iostream>
 #include <vector>
+#include <map>
 
 
 using namespace std;
 
 int main() {
-vector<int> elements = { 1,6,828,-48,99,135,-7 };
-for (int i = 0; i < elements.size(); i++) {
-	for (int g = i+1; g < elements.size(); g++) {
-		if (elements[g] < elements[i]) {
-			int n = elements[i];
-			elements[i] = elements[g];
-			elements[g] = n;
-		}
-	}
-}
-for (int value : elements) {
-	cout << value << ' ';
-}
-return 0;
+    setlocale(LC_ALL, "ru");
+    // название животного, количество ног
+    map<string, int> animals = {
+        {"собака"s, 4},
+        {"попугай"s, 2},
+        {"слон"s, 4},
+        {"кенгуру"s, 2},
+        {"многоножка"s, 100},
+        {"червяк"s, 0}
+    };
+   /* animals.erase("собака"); */
+    animals["собака"] = 6;
+    animals.insert({ "кот", 4 });
+    animals.insert(make_pair("лошадь", 4));
+    for (const auto& [key, value]: animals) {
+        if (value == 4) {
+            cout << key << ' ' << value << endl;
+        }
+    }
 }
