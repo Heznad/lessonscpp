@@ -1,28 +1,39 @@
 ﻿#include <iostream>
-#include <string>
-#include <map>
+#include <vector>
 
 using namespace std;
 
- int main() {
-    map<string, string> sounds = { {"cat"s, "meow"s},
-                                        {"dog"s, "bark"s},
-                                        {"cow"s, "moo"s},
-                                        {"owl"s, "hoot"s},
-                                        {"tiger"s, "roar"s} };
-   
-    for (const auto& [key, value] : sounds) {
-        cout << key << ' ' << value << endl;
+// int - тип возвращаемого значения (то, что поле return)
+// Sum - название Функции
+// int a, int b - принимаемые функцией переменные
+int Sum(int first, int second) {
+    int result = first + second;
+    return result;
+}
+
+int MinElement(vector<int> elements) {
+    if (elements.empty()) {
+        return 0;
     }
-    cout << "========" << endl;
-
-    map<string, string> sounds2;
-    for (const auto& [key, value] : sounds) {
-        sounds2.insert({value,key});
-     }
-
-    for (const auto& [key, value] : sounds2) {
-        cout << key << ' ' << value << endl;
+    int min = elements[0];
+    for (int value : elements) {
+        if (min > value) {
+            min = value;
+        }
     }
+    return min;
+}
 
+void Print(int printed) {
+    cout << printed << endl;
+}
+
+int main() {
+    vector<int> elements{25, 72, -1, 100};
+    cout << MinElement(elements)<< endl;
+    //int a = 2;
+    //int b = 3;
+    //int c = Sum(a, b);
+    //Print(c);
+    return 0;
 }
