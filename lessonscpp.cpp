@@ -1,28 +1,28 @@
 ﻿#include <iostream>
-#include <vector>
+#include <string>
 #include <map>
-
 
 using namespace std;
 
-int main() {
-    setlocale(LC_ALL, "ru");
-    // название животного, количество ног
-    map<string, int> animals = {
-        {"собака"s, 4},
-        {"попугай"s, 2},
-        {"слон"s, 4},
-        {"кенгуру"s, 2},
-        {"многоножка"s, 100},
-        {"червяк"s, 0}
-    };
-   /* animals.erase("собака"); */
-    animals["собака"] = 6; //поменять значение
-    animals.insert({ "кот", 4 }); //добавить пару
-    animals.insert(make_pair("лошадь", 4)); //добавить пару
-    for (const auto& [key, value]: animals) {
-        if (value == 4) {
-            cout << key << ' ' << value << endl;
-        }
+ int main() {
+    map<string, string> sounds = { {"cat"s, "meow"s},
+                                        {"dog"s, "bark"s},
+                                        {"cow"s, "moo"s},
+                                        {"owl"s, "hoot"s},
+                                        {"tiger"s, "roar"s} };
+   
+    for (const auto& [key, value] : sounds) {
+        cout << key << ' ' << value << endl;
     }
+    cout << "========" << endl;
+
+    map<string, string> sounds2;
+    for (const auto& [key, value] : sounds) {
+        sounds2.insert({value,key});
+     }
+
+    for (const auto& [key, value] : sounds2) {
+        cout << key << ' ' << value << endl;
+    }
+
 }
