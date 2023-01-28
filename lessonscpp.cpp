@@ -20,23 +20,22 @@ double SredArifm(vector<double> elements) {
 	return sredarifm;
 }
 
-void Swap(map<string, string > changepos) {
+map<string, string> Swap(map<string, string> changepos) {
 	map<string, string> noise;
 	for (const auto& [key, value] : changepos) {
 		noise.insert({ value,key });
-	};
-	for (const auto& [key, value] : noise) {
-		cout << key << ' ' << value << endl;
 	}
+	return noise;
 }
 
-void PologElementi(vector<int>elements) {
-	set<int> elem(elements.begin(), elements.end());
-	for (int value : elem) {
+set<int> PologElementi(vector<int>elements) {
+	set<int> elem;
+	for (int value : elements) {
 		if (value > 0) {
-			cout << value << ' '<<endl;
+			elem.insert(value);
 		}
 	}
+	return elem;
 }
 
 int main() {
@@ -59,7 +58,10 @@ int main() {
 										{"owl"s, "hoot"s},
 										{"tiger"s, "roar"s} };
 	
-	Swap(sounds);
+	//map<string,string>noise = Swap(sounds);
+	for (const auto&[key,value] : Swap(sounds)) {
+		cout << key << ' ' << value << endl;
+	}
 	
 	cout << "=============================================" << endl;
 
@@ -67,7 +69,10 @@ int main() {
 
 	vector<int> elem = { 5,90,-232,54,23,5,23,1,90,-65 };
 
-	PologElementi(elem);
+	set<int>ele = PologElementi(elem);
+	for (int value : ele ) {
+		cout << value << endl;
+	}
 
 	return 0;
 }
