@@ -1,24 +1,31 @@
 ﻿#include <iostream>
+#include <vector>
 
 using namespace std;
 
+//Задание. Четные позиции вектора занулить
+
+void ObnulChet(vector<int>& vector) {
+	for (int i = 0; i < vector.size();i++) {
+		if (i % 2 == 0) {
+			vector[i] = 0;
+		}
+	}
+}
+
+void Print(const vector<int>& elements) {
+	for (const int& value : elements) {
+		cout << value << ' ';
+	}
+	cout << endl;
+}
+
 int main() {
-
-	/*1) Создать указатель на эту переменную и прибавить к ней 5 через указатель,
-не обращаясь к её имени напрямую.Т.е.нельзя написать value += 5. Нужно взаимодействие с указателем.*/
-
-	double a = 9.58;
-	double* ukaz_a = &a;
-	*ukaz_a += 5;
-	cout << " a = " << *ukaz_a << endl;
-
-	cout << "=========================================" << endl;
-
-	/*2) Создать ссылку на переменную и через ссылку умножить переменную на - 1*/
-
-	double& ssilka_a = a;
-	ssilka_a = ssilka_a * (-1);
-	cout << " a = " << ssilka_a << endl;
-
-	return 0; 
+	vector<int> vector{ 7,4,19,32,0,47,87,0,-12,523,-61,20 };
+	cout << "before" << endl;
+	Print(vector);
+	cout << "after" << endl;
+	ObnulChet(vector);
+	Print(vector);
+	return 0;
 }
