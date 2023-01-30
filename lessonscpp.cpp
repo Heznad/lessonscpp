@@ -5,46 +5,46 @@
 using namespace std;
 
 
+//string BezProbelov(string text) {
+//	text.erase(remove(text.begin(), text.end(), ' '), text.end());
+//	return text;
+//}
 
-void Sum(vector<int>& elements) {
-	if (elements.empty()) {
-		cout << "Котейнер пуст" << endl;
-		return ;
-	}
-
-	int sum = 0;
-	for (int& value : elements) {
-		if (value > 0) {
-			sum = sum + value;
+string BezProbel(const string& text) {
+	string result;
+	for (int i = 0; i < text.size(); i++) {
+		if (text[i] != ' ') {
+			result.push_back(text[i]);
 		}
 	}
-	if (sum != 0) {
-		elements.push_back(sum);
-	}
+	return result;
 }
+
 void Test() {
 	{
-		vector<int> input = { 5,2,52 };
-		vector<int> etalon = { 5,2,52,59 };
-		Sum(input);
-		assert(input == etalon);
+		string text = "My Name Vitalya";
+		string etalon = "MyNameVitalya";
+		assert(BezProbel(text) == etalon);
 	}
 	{
-		vector<int> input;
-		Sum(input);
-		assert(input.empty());
+		string text;
+		assert(BezProbel(text).empty() );
 	}
 	{
-		vector<int> input = { -5,-2,-52 };
-		vector<int> etalon = input;
-		Sum(input);
-		assert(input == etalon);
+		string text = "Hello";
+		assert(BezProbel(text) == text);
 	}
-	cout << "All test passed" << endl;
 }
 
 int main() {
 	setlocale(LC_ALL, "ru");
 	Test();
+/* #3 Написать функцию удаления из строки пробелов.
+Функция должна возвращать строку без пробелов.Написать тесты.
+Пример: "Hello world" = > "Helloworld" */
+
+	string text = "My Name Vitalya";
+	cout << "С пробелами = " << text << endl;
+	cout << "Без пробелов = " << BezProbel(text) << endl;
 	return 0;
 }
