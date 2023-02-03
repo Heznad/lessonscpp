@@ -5,23 +5,27 @@
 
 using namespace std;
 
-//Задача: слова, начинающиеся с маленькой буквы выводить в консоль, а с большой - в файл
+//Задача - считать из созданного файла все строки.Решить где их хранить после считывания(внутри программы)
 
 int main() {
-	vector <string> text = { "Yellow", "red", "Green", "Pueple", "blue", "black", "White" };
-	string name_file = "text.txt"s;
-	ofstream fout;
-	fout.open(name_file);
 
-	for (string value: text){
-		if (isupper(value[0])) {
-			fout << value << endl;
-		}
-		else {
-			cout << value << endl;
-		}
+	ifstream file("text.txt");
+	if (!file.is_open()) {
+		cout << "File is not open!" << endl;
+		return 0;
+	}
+	vector<string> stroki;
+	string c;
+
+	while (!file.eof()) {
+		getline (file,c);
+		stroki.push_back(c);
+	}
+	for (string value : stroki) {
+		cout << value << endl;
 	}
 
-	fout.close();
+	file.close();
+
 	return 0;
 }
