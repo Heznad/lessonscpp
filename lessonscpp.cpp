@@ -1,50 +1,27 @@
 ﻿#include <iostream>
+#include <fstream>
 #include <vector>
-#include <cassert>
+#include <string>
 
 using namespace std;
 
-
-//string BezProbelov(string text) {
-//	text.erase(remove(text.begin(), text.end(), ' '), text.end());
-//	return text;
-//}
-
-string BezProbel(const string& text) {
-	string result;
-	for (int i = 0; i < text.size(); i++) {
-		if (text[i] != ' ') {
-			result.push_back(text[i]);
-		}
-	}
-	return result;
-}
-
-void Test() {
-	{
-		string text = "My Name Vitalya";
-		string etalon = "MyNameVitalya";
-		assert(BezProbel(text) == etalon);
-	}
-	{
-		string text;
-		assert(BezProbel(text).empty() );
-	}
-	{
-		string text = "Hello";
-		assert(BezProbel(text) == text);
-	}
-}
+//Задача: слова, начинающиеся с маленькой буквы выводить в консоль, а с большой - в файл
 
 int main() {
-	setlocale(LC_ALL, "ru");
-	Test();
-/* #3 Написать функцию удаления из строки пробелов.
-Функция должна возвращать строку без пробелов.Написать тесты.
-Пример: "Hello world" = > "Helloworld" */
+	vector <string> text = { "Yellow", "red", "Green", "Pueple", "blue", "black", "White" };
+	string name_file = "text.txt"s;
+	ofstream fout;
+	fout.open(name_file);
 
-	string text = "My Name Vitalya";
-	cout << "С пробелами = " << text << endl;
-	cout << "Без пробелов = " << BezProbel(text) << endl;
+	for (string value: text){
+		if (isupper(value[0])) {
+			fout << value << endl;
+		}
+		else {
+			cout << value << endl;
+		}
+	}
+
+	fout.close();
 	return 0;
 }
