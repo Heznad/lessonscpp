@@ -1,31 +1,42 @@
 ﻿#include <iostream>
 #include <fstream>
-#include <vector>
+#include <sstream>
+#include <cassert>
 #include <string>
+#include <vector>
 
 using namespace std;
 
-//Задача - считать из созданного файла все строки.Решить где их хранить после считывания(внутри программы)
+void WriteToFile(ostream& out, const string& text) {
+    out << text;
+}
+
+vector<string> ReadFromFile(istream& out) {
+    vector<string> result;
+    string str;
+    while (!out.eof()) // пока файл не пуст, считываем из файла по одному символу и выводим на экран
+    {
+       /* getline(out, str);
+        result.emplace_back(str);*/
+
+        result.emplace_back();
+        getline(out, result.back());
+        
+    }
+    return result;
+}
+
 
 int main() {
+   /* ofstream fout("test.txt"s);
+    string str = "sdhfjhskd";
+    WriteToFile(fout, str);
+    fout.close();*/
 
-	ifstream file("text.txt");
-	if (!file.is_open()) {
-		cout << "File is not open!" << endl;
-		return 0;
-	}
-	vector<string> stroki;
-	string c;
+    ifstream iout("test.txt"s);
 
-	while (!file.eof()) {
-		getline (file,c);
-		stroki.push_back(c);
-	}
-	for (string value : stroki) {
-		cout << value << endl;
-	}
-
-	file.close();
-
-	return 0;
+    for (string value : ReadFromFile(iout) ) {
+        cout << value << '\n';
+    }
+    return 0;
 }
