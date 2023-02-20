@@ -1,34 +1,22 @@
 ﻿#include <iostream>
-#include <vector>
 
 using namespace std;
 
 int main() {
-	setlocale(LC_ALL, "ru");
-	vector<int> elements = { 2, 4, 9, -5, 10, 6, 4 };
-	vector<int> before;
-	
-	vector<int>::const_iterator it = elements.begin();
-	vector<int>::const_iterator it_end = elements.end();
-
-
-	while (*it >= 0) {
-		before.push_back(*++it);
+	int const size = 3;
+	int arr[size][size] = {
+		{2,5,0},
+		{7,-2,10},
+		{5,6,20}
+	};
+	int sum = 0;
+	for (int i = 0; i < size; i++) {
+		for (int j = 0; j < size; j++) {
+			if (i == j) {
+				sum += arr[i][j];
+			}
+		}
 	}
-	vector<int> after(it+1, it_end);
-
-	cout << "до" << endl;
-
-	for (int const value : before) {
-		cout << value << "\t";
-	}
-
-	cout << endl;
-
-	cout << "после" << endl;
-
-	for (int const value : after) {
-			cout << value << "\t";
-	}
-	
+	cout << sum << endl;
 }
+	
