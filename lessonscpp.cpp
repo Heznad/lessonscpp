@@ -4,57 +4,44 @@
 
 using namespace std;
 
-class People {
+/*Задание
+Написать класс - обертку на динамический массив.
+Чтобы мы не боялись утечки памяти и могли пользоваться этим массивом как вектором
+Динамический массив одномерный*/
+
+class Massive {
 public:
 
-    People(const string& name) {
-        name_ = name;
-        cout << "Hello, my name is " << name_ << endl;
+    Massive(int volume) {
+        size = volume;
+        arr = new int [size];
     }
 
-    ~People() {
-        cout << name_ << " go away" << endl;
+    ~Massive() {
+        delete[] arr;
     }
 
-    People(const People& another) {
-        age_ = another.age_;
-        name_ = another.name_ + "_clon";
-        cout << "Hello, my name is " << name_ << endl;
+    void EditElement(const int& i) {
+        cout << "Vvedite novii element: ";
+        int b = 0;
+        cin >> b;
+        arr[i] = b;
     }
-
-    string GetName() const {
-        return name_;
-    }
-
-    void SetName(const string& name) {
-        name_ = name;
-    }
-
-    int GetAge() const {
-        return age_;
-    }
-
-    int GetID() const {
-        return id_pass_;
-    }
-
-
 
 private:
-    int age_ = 10;
-    string name_ = "no name";
-    int id_pass_ = 1111;
+    int* arr;
+    int size;
 };
 
 int main() {
-     //People first("George"s);
-     //People second(first);
-     vector<People> group;
-     group.reserve(10);
-     group.emplace_back("Li"s);
-     group.emplace_back("Pasha"s);
-     group.emplace_back("Alixan"s);
-     
-
+    int size = 0;
+    cout << "Enter size array: ";
+    cin >> size;
+    Massive mas(size);
+    for (int i = 0; i < size; ++i) {
+        mas.EditElement(i);
+    };
+    cout << endl;
     return 0;
+
 }
