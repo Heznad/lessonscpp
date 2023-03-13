@@ -1,47 +1,46 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 using namespace std;
 
-/*Задание
-Написать класс - обертку на динамический массив.
-Чтобы мы не боялись утечки памяти и могли пользоваться этим массивом как вектором
-Динамический массив одномерный*/
 
-class Massive {
-public:
-
-    Massive(int volume) {
-        size = volume;
-        arr = new int [size];
+vector<int> operator+(const vector<int>& first, const vector<int>& second) {
+    if (first.size() != second.size()) {
+        throw logic_error("size1 != size2"s);
     }
-
-    ~Massive() {
-        delete[] arr;
+    vector<int> result(first.size());
+    for (size_t i = 0; i < result.size(); ++i) {
+        result[i] = first[i] + second[i];
     }
+    return result;
+}
 
-    void EditElement(const int& i) {
-        cout << "Vvedite novii element: ";
-        int b = 0;
-        cin >> b;
-        arr[i] = b;
+ostream& operator<<(ostream& out, const vector<int>& second) {
+    for (int v : second) {
+        out << v << ' ';
     }
+    return out;
+}
 
-private:
-    int* arr;
-    int size;
-};
+vector<int> operator++(vector<int>& first) {
+    for (size_t i = 0; i<first.size();++i) {
+        first[i]++;
+    }
+    return first;
+}
 
 int main() {
-    int size = 0;
-    cout << "Enter size array: ";
-    cin >> size;
-    Massive mas(size);
-    for (int i = 0; i < size; ++i) {
-        mas.EditElement(i);
-    };
-    cout << endl;
+    vector<int> a{ 1,2,3,4,5 };
+    vector<int> b{ 9,8,7,6,5 };
+    try {
+        vector<int> c = a + b;
+        ++c;
+        cout << c << endl;
+    }
+    catch (const logic_error& except) {
+        cout << except.what() << endl;
+    }
     return 0;
-
 }
