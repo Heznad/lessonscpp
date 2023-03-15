@@ -1,46 +1,70 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
-#include <stdexcept>
 
 using namespace std;
 
+/*Задание
+Написать конструкторы:
+1) который будет инициализировать наш массив значениями по умолчанию 
+2) который будет инициализировать наш массив заданным значением
+3) написать метод вывода значений в консоль
+vector<int> a(5)*/
 
-vector<int> operator+(const vector<int>& first, const vector<int>& second) {
-    if (first.size() != second.size()) {
-        throw logic_error("size1 != size2"s);
-    }
-    vector<int> result(first.size());
-    for (size_t i = 0; i < result.size(); ++i) {
-        result[i] = first[i] + second[i];
-    }
-    return result;
-}
+class Massive {
+public:
 
-ostream& operator<<(ostream& out, const vector<int>& second) {
-    for (int v : second) {
-        out << v << ' ';
+    Massive(const int& volume) {
+        size = volume;
+        arr = new int[size];
+        for (int i = 0; i < size; ++i) {
+            arr[i] = 0;
+        }
     }
-    return out;
-}
 
-vector<int> operator++(vector<int>& first) {
-    for (size_t i = 0; i<first.size();++i) {
-        first[i]++;
+    Massive(const int& volume,const int& b) {
+        size = volume;
+        arr = new int[size];
+        for (int i = 0; i < size; ++i) {
+            arr[i] = b;
+        }
     }
-    return first;
-}
+
+    ~Massive() {
+        delete[] arr;
+    }
+
+    void EditElement() {
+        for (int i = 0; i < size; ++i) {
+            cout << "Vvedite novii element: ";
+            int b = 0;
+            cin >> b;
+            arr[i] = b;
+        }
+
+    }
+
+    void Vivod() {
+        cout << "Massive: ";
+        for (int i = 0; i < size; ++i) {
+            cout << arr[i] << ' ';
+        }
+        cout << endl;
+    }
+
+private:
+    int* arr;
+    int size;
+};
 
 int main() {
-    vector<int> a{ 1,2,3,4,5 };
-    vector<int> b{ 9,8,7,6,5 };
-    try {
-        vector<int> c = a + b;
-        ++c;
-        cout << c << endl;
-    }
-    catch (const logic_error& except) {
-        cout << except.what() << endl;
-    }
+    int size = 0;
+    cout << "Enter size array: ";
+    cin >> size;
+    Massive mas(size);
+    mas.EditElement();
+    mas.Vivod();
+    Massive mas1(size, 10);
+    mas1.Vivod();
     return 0;
 }
