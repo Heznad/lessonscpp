@@ -1,19 +1,17 @@
 ﻿#include <iostream>
 #include <string>
 #include <vector>
+#include <algorithm>
 using namespace std;
 
 /*Задание
-Написать конструкторы:
-1) который будет инициализировать наш массив значениями по умолчанию
-2) который будет инициализировать наш массив заданным значением
-3) написать метод вывода значений в консоль
-vector<int> a(5)*/
-
-
+Задание написать методы begin, cbegin, end, cend. Проверить на цикле for
+cbegin - возвращает константный итератор (указатель)*/
 
 class Massive {
 public:
+
+    using ptr = int*;
 
     Massive(int volume) {
         size = volume;
@@ -49,6 +47,22 @@ public:
         return size;
     }
 
+    ptr begin() {
+        return arr;
+    }
+
+    ptr cbegin() const {
+        return arr;
+    }
+
+    ptr end() {
+        return arr + size;
+    }
+
+    ptr cend() const {
+        return arr + size;
+    }
+
     int& operator[](int i) {
         return arr[i];
     }
@@ -70,13 +84,21 @@ ostream& operator<<(ostream& out, const Massive& mas) {
 }
 
 int main() {
-    int size = 0;
+    /*int size = 0;
     cout << "Enter size array: ";
     cin >> size;
     Massive mas(size);
     mas.EditElement();
     cout << mas << endl;
     Massive mas1(size, 10);
-    cout << mas1 << endl;
+    cout << mas1 << endl;*/
+    Massive mas(3);
+    mas.EditElement();
+    cout << mas << endl;
+    reverse(mas.begin(), mas.end());
+    for (int value : mas) {
+        cout << value << ' ';
+    }
+    cout << endl;
     return 0;
 }
